@@ -43,7 +43,6 @@ class HoleClient(discord.Client):
                 except Exception:
                     pass
 
-        print(f"Games loaded.\n Status:\n {self.manager.get_status()}")
         pass
 
     async def on_message(self, message):
@@ -51,8 +50,8 @@ class HoleClient(discord.Client):
         if message.author.id == self.user.id:
             return
 
-        print(f"\n Author ID{message.author.id}, User_ID {self.user.id}")
-        print(message.content)
+        # print(f"\n Author ID{message.author.id}, User_ID {self.user.id}")
+        # print(message.content)
 
         res = Command.process_event(message=message,
                                     manager=self.manager)

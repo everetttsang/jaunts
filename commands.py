@@ -24,8 +24,8 @@ class Command:
             if command[1] == 'toggle':
                 if command[2] == 'gm':
                     # if message.author.id in self.record[str(message.guild.id)]['admins']:
-                    return manager.start_game(message=message,
-                                              game='gm')
+                    return manager.toggle_game(message=message,
+                                               game='gm')
 
         except IndexError as e:
             return f"Jaunt Failed: {e}"

@@ -14,6 +14,12 @@ class GoodMorning(Jaunt):
 
     def enable(self):
         self.enabled = True
+        print(f"Enabling Jaunt `{self.game_id}`: Channel ID: {self.channel_id}")
+        return f"Good Morning Counter enabled: {self.enabled}"
+
+    def disable(self):
+        self.enabled = False
+        print(f"Disabling Jaunt `{self.game_id}`: Channel ID: {self.channel_id}")
         return f"Good Morning Counter enabled: {self.enabled}"
 
     def on_event(self, message) -> str or None:
