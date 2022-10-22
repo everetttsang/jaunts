@@ -3,12 +3,14 @@ from app.Jaunt import Jaunt
 
 
 class GoodMorning(Jaunt):
-    gm_counter: int
+    gm_counter: int = 0
+    game_id: str = "gm"
 
-    def __init__(self):
+    def __init__(self, channel_id: int):
         super().__init__()
         self.gm_counter = 0
-        self.game_id = "gm"
+        self.channel_id = channel_id
+        self.enabled = False
 
     def enable(self):
         self.enabled = True
@@ -19,6 +21,11 @@ class GoodMorning(Jaunt):
         content = message.content
         author = message.author
         channel = message.channel
+
+        if message.channel.id != self.channel_id:
+            return
+        if not self.enabled:
+            return
 
         try:
             if 'gm' in content.lower():

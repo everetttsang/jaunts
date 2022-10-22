@@ -1,15 +1,14 @@
 
 from app.JauntManager import JauntManager
 
+
 class Command:
     context: JauntManager
     payload: str
+    record: dict
 
-    def __init__(self, context, message):
-        self.payload = message
-        self.context = context
-
-    def process_event(self, message):
+    @classmethod
+    def process_event(cls, message, manager):
         content = message.content
         channel = message.channel
         try:
@@ -19,19 +18,17 @@ class Command:
             return
 
         if instruction_word != '.jaunt':
-            return self.context.tickle_games(message=message)
+            return manager.trigger_games(message=message)
 
         try:
             if command[1] == 'toggle':
                 if command[2] == 'gm':
-                    return self.context.toggle_game(game='gm')
+                    # if message.author.id in self.record[str(message.guild.id)]['admins']:
+                    return manager.start_game(message=message,
+                                              game='gm')
 
         except IndexError as e:
             return f"Jaunt Failed: {e}"
         except Exception as e:
             return
-        return
-
-    @staticmethod
-    def trigger_jaunt(message):
         return
